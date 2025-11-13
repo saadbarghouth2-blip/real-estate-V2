@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Real Estate — موقع عرض عقارات</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="brand">🏠 <span>RealEstate</span></div>
+    <div class="nav-actions">
+      <input id="globalSearch" placeholder="ابحث عن اسم عقار أو منطقة..." />
+      <button id="openAll" class="btn ghost">عرض الكل</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>ابحث و استكشف أفضل العقارات</h1>
+      <p>Landing احترافي + خريطة ذكية + Dashboard بسيط — جاهز للعرض في البورتفوليو</p>
+      <div class="hero-search">
+        <input id="heroSearch" placeholder="مثال: شقة في الزمالك" />
+        <select id="heroType">
+          <option value="all">الكل</option>
+          <option value="Apartment">شقة</option>
+          <option value="Villa">فيلا</option>
+          <option value="Land">أرض</option>
+          <option value="Office">مكتب</option>
+        </select>
+        <button id="heroBtn" class="btn primary">ابحث</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN LAYOUT -->
+  <main class="layout">
+    <aside class="leftpanel">
+      <div class="metrics">
+        <div class="metric"><div class="m-title">إجمالي العقارات</div><div id="metricCount" class="m-value">0</div></div>
+        <div class="metric"><div class="m-title">متوسط السعر</div><div id="metricAvg" class="m-value">-</div></div>
+        <div class="metric"><div class="m-title">الأكثر</div><div id="metricTop" class="m-value">-</div></div>
+      </div>
+
+      <div class="filters">
+        <h3>فلتر</h3>
+        <label>النوع</label>
+        <select id="typeFilter">
+          <option value="all">الكل</option>
+          <option value="Apartment">شقة</option>
+          <option value="Villa">فيلا</option>
+          <option value="Land">أرض</option>
+          <option value="Office">مكتب</option>
+        </select>
+
+        <label>السعر حتى</label>
+        <input id="priceFilter" type="range" min="0" max="5000000" step="5000" value="5000000">
+        <div class="rangeValue">حتى <span id="priceLabel">5,000,000</span> $</div>
+
+        <label>الغرف (<=)</label>
+        <input id="bedsFilter" type="number" min="0" max="10" value="0">
+
+        <label>مساحة (m²) min</label>
+        <input id="areaFilter" type="number" min="0" max="5000" value="0">
+
+        <div class="filter-actions">
+          <button id="applyBtn" class="btn primary">تطبيق</button>
+          <button id="resetBtn" class="btn ghost">إعادة</button>
+        </div>
+      </div>
+
+      <div class="charts">
+        <h3>إحصاءات (أنواع)</h3>
+        <canvas id="chartType" height="160"></canvas>
+      </div>
+    </aside>
+
+    <section class="mainpanel">
+      <div class="map-top">
+        <div>
+          <button id="btnCluster" class="btn ghost">Toggle Clusters</button>
+          <button id="btnHeat" class="btn ghost">Toggle Heatmap</button>
+        </div>
+        <div>
+          <select id="sortBy">
+            <option value="default">ترتيب افتراضي</option>
+            <option value="price_asc">السعر ↑</option>
+            <option value="price_desc">السعر ↓</option>
+            <option value="area_desc">المساحة ↓</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="map" class="map"></div>
+
+      <section class="listingsSection">
+        <div class="list-header">
+          <h3>العقارات</h3>
+          <div id="resultsInfo"></div>
+        </div>
+
+        <div id="listings" class="list-grid"></div>
+
+        <div class="pagination" id="pagination"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close"><i class="fas fa-times"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">© 2025 RealEstate — جاهز للعرض</footer>
+
+  <!-- Libs -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster-src.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App JS -->
+  <script src="app.js"></script>
+</body>
+</html>

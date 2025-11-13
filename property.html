@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تفاصيل العقار</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <header class="nav"><div class="brand">🏠 <span>RealEstate</span></div></header>
+  <main style="max-width:1100px;margin:18px auto;padding:12px">
+    <div id="propDetail"></div>
+    <div id="smallMap" style="height:300px;margin-top:12px;border-radius:8px;overflow:hidden"></div>
+  </main>
+<script>
+async function loadData(){
+  const url = new URL(location.href);
+  const id = url.searchParams.get('id');
+  const r = await fetch('data/properties.geojson');
+  const g = await r.json();
+  const f = g.features.find(x => String(x.properties.id) === String(id));
+  if(!f){ document.getElementById('propDetail').innerHTML = '<p>العقار غير موجود</p>'; return; }
+  document.getElementById('propDetail').innerHTML = `
+    <h1>${f.properties.name}</h1>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <img src="${f.properties.image}" style="width:48%;min-width:300px;height:300px;object-fit:cover;border-radius:8px"/>
+      <div style="flex:1">
+        <p><b>السعر:</b> $${(f.properties.price||0).toLocaleString()}</p>
+        <p><b>المساحة:</b> ${f.properties.area} m²</p>
+        <p><b>النوع:</b> ${f.properties.type}</p>
+        <p><b>الغرف:</b> ${f.properties.beds}</p>
+        <p style="margin-top:12px">${f.properties.desc || ''}</p>
+      </div>
+    </div>
+  `;
+  const coords = f.geometry.coordinates;
+  const m = L.map('smallMap').setView([coords[1], coords[0]], 15);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(m);
+  L.marker([coords[1], coords[0]]).addTo(m).bindPopup(f.properties.name).openPopup();
+}
+loadData();
+</script>
+</body>
+</html>

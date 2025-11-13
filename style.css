@@ -1,0 +1,75 @@
+/* Reset & fonts */
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, system-ui, Arial; background:#f5f7fb;color:#222;direction:rtl}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,0.06);position:sticky;top:0;z-index:999}
+.brand{font-weight:700}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.nav-actions input{padding:8px;border-radius:8px;border:1px solid #eef6ff}
+
+/* HERO */
+.hero{background:linear-gradient(90deg, rgba(37,99,235,0.85), rgba(37,99,235,0.55)), url('https://placehold.co/1200x400') center/cover no-repeat;color:#fff;padding:60px 20px;text-align:center}
+.hero-inner{max-width:1100px;margin:0 auto}
+.hero h1{font-size:36px;margin:0 0 10px}
+.hero-search{margin-top:18px;display:flex;gap:8px;justify-content:center}
+.hero-search input, .hero-search select{padding:10px;border-radius:8px;border:0}
+
+/* LAYOUT */
+.layout{display:flex;gap:16px;padding:18px;max-width:1300px;margin:18px auto}
+.leftpanel{width:320px;flex-shrink:0}
+.mainpanel{flex:1}
+
+/* METRICS */
+.metrics{display:flex;gap:12px;margin-bottom:14px}
+.metric{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 20px rgba(37,99,235,0.04);flex:1;text-align:center}
+.m-title{font-size:13px;color:#666}
+.m-value{font-size:20px;font-weight:700;margin-top:6px}
+
+/* FILTERS */
+.filters{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(37,99,235,0.03);margin-bottom:14px}
+.filters label{display:block;margin-top:8px;color:#333;font-size:13px}
+.filters input, .filters select{width:100%;padding:8px;border-radius:8px;border:1px solid #eef6ff;margin-top:6px}
+.rangeValue{margin-top:6px;color:#555;font-size:13px}
+.filter-actions{display:flex;gap:8px;margin-top:12px}
+
+/* MAP */
+.map{height:520px;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.06);margin-bottom:12px}
+.map-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+
+/* LISTINGS */
+.listingsSection{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 20px rgba(37,99,235,0.03)}
+.list-grid{display:flex;flex-wrap:wrap;gap:12px;padding:10px}
+.card-item{width:calc(33.333% - 12px);background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.05);cursor:pointer;transition:transform .25s,box-shadow .25s}
+.card-item:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(37,99,235,0.12)}
+.card-item img{width:100%;height:160px;object-fit:cover}
+.card-body{padding:10px}
+.card-title{font-weight:700}
+.card-meta{color:#666;font-size:13px;margin-top:6px}
+.card-price{color:#2563eb;font-weight:700;margin-top:8px}
+
+/* PAGINATION */
+.pagination{display:flex;gap:6px;justify-content:center;padding:12px}
+
+/* Modal */
+.modal{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:9999}
+.modal-card{background:#fff;border-radius:12px;padding:18px;max-width:900px;width:95%;max-height:90vh;overflow:auto;position:relative}
+.modal-close{position:absolute;left:14px;top:12px;background:transparent;border:0;font-size:20px;cursor:pointer}
+
+/* custom marker pulse */
+.custom-marker .pulse{width:14px;height:14px;border-radius:50%;background:#2563eb;box-shadow:0 0 0 6px rgba(37,99,235,0.15);}
+
+/* Footer */
+.footer{padding:20px;text-align:center;background:#111;color:#fff;margin-top:20px;border-radius:8px;margin:20px}
+
+/* Responsive */
+@media (max-width:1000px){
+  .card-item{width:calc(50% - 12px)}
+  .leftpanel{display:none}
+  .layout{padding:12px}
+}
+@media (max-width:600px){
+  .card-item{width:100%}
+  .hero h1{font-size:24px}
+  .hero-search{flex-direction:column;gap:10px}
+}
